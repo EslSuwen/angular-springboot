@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 
-/** @Author: suwen @Date: 2020/1/30 6:58 下午 */
+/**
+ * 登录 controller
+ *
+ * @author: suwen
+ * @time: 2020/1/30 6:58 下午
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/login")
@@ -21,6 +26,15 @@ public class LoginController {
 
   @Autowired private DefaultKaptcha defaultKaptcha;
 
+  /**
+   * 登录验证
+   *
+   * @param user 用户
+   * @param request http 请求
+   * @return: com.cqjtu.angularspringboot.Model.Message
+   * @author: suwen
+   * @time: 2020/2/3 1:26 下午
+   */
   @PostMapping("/toLogin")
   public Message toLogin(@RequestBody User user, HttpServletRequest request) {
     System.out.println(request.getSession().getAttribute("teachernum"));

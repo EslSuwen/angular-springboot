@@ -1,6 +1,14 @@
 package com.cqjtu.angularspringboot.enity;
 
-/** @Author: suwen @Date: 2020/1/31 2:20 下午 */
+import lombok.Data;
+
+/**
+ * 用户
+ *
+ * @author: suwen
+ * @time: 2020/2/3 2:01 下午
+ */
+@Data
 public class User {
   private int id;
   private String name;
