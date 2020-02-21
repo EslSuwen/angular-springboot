@@ -2,10 +2,7 @@ package com.cqjtu.angularspringboot.Model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 标明是Entity，以被jpa识别为数据，映射到MySQL数据库。必须与@Id注解 结合使用
@@ -29,6 +26,7 @@ public class Demodata {
 
   private String name;
   private Integer height;
+  @Transient private Message message;
 
   public Integer getId() {
     return id;
@@ -52,5 +50,13 @@ public class Demodata {
 
   public void setHeight(Integer height) {
     this.height = height;
+  }
+
+  public Message getMessage() {
+    return message;
+  }
+
+  public void setMessage(Message message) {
+    this.message = message;
   }
 }

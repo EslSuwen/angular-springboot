@@ -8,9 +8,14 @@
   <span>输入身高: </span> <input (change)="updateHeight($event.target.value)">
 </div>
 
-<button (click)="submitInfo()"> 提交 </button>
-<button (click)="checkData()"> 检查 </button>
-<button (click)="clearData()"> 清空 </button>
+<div>
+  <!--  输入框绑定angular的(change)方法，调用组件函数，更新私有变量demo的height属性-->
+  <span>输入一段信息: </span> <input (change)="updateMsg($event.target.value)">
+</div>
+
+<button (click)="submitInfo()"> 提交</button>
+<button (click)="checkData()"> 检查</button>
+<button (click)="clearData()"> 清空</button>
 
 <hr>
 
@@ -28,5 +33,6 @@
     <span>  {{data.id}}  </span>
     <span>  {{data.name}}  </span>
     <span>  {{data.height}}  </span>
+    <span>  {{data.message.msg}}  </span>
   </li>
 </ul>

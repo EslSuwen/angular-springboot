@@ -20,11 +20,11 @@ export class DemoService {
   // 观察者模式方法。用post方法发送Demo类型数据，并等待返回的信息
   // 返回的是json格式，可以在本地建立数据模型，这里用any类型接受
   addToDatabase(demodata: Demo): Observable<any> {
-    return this.http.post<any>(this.api + 'newData/', demodata)
+    return this.http.post<any>(this.api + 'newConData/', demodata)
   }
 
   checkDatabase(): Observable<Demo[]> {
-    return this.http.get<Demo[]>(this.api + 'getData/')
+    return this.http.get<Demo[]>(this.api + 'getConData/')
   }
 
   clearDatabase(): Observable<any> {
