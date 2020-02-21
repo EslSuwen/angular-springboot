@@ -4,6 +4,7 @@ export class Demo {
   name: string;
   height: number;
   message: Message;
+  stringList: Array<string>
 }
 
 export class Message {

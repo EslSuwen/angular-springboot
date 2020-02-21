@@ -1,8 +1,10 @@
 package com.cqjtu.angularspringboot.Model;
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 标明是Entity，以被jpa识别为数据，映射到MySQL数据库。必须与@Id注解 结合使用
@@ -11,6 +13,7 @@ import javax.persistence.*;
  * @time: 2020/1/31 6:01 下午
  */
 @Entity
+@Data
 public class Demodata {
 
   /**
@@ -27,36 +30,5 @@ public class Demodata {
   private String name;
   private Integer height;
   @Transient private Message message;
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Integer getHeight() {
-    return height;
-  }
-
-  public void setHeight(Integer height) {
-    this.height = height;
-  }
-
-  public Message getMessage() {
-    return message;
-  }
-
-  public void setMessage(Message message) {
-    this.message = message;
-  }
+  @Transient private List<String> stringList;
 }

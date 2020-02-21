@@ -83,15 +83,15 @@ public class DemoController {
    * @time: 2020/2/20 下午4:26
    */
   @PostMapping(value = "/newConData")
-  public Message addNewConData(@RequestBody Demodata demodata) {
+  public Demodata addNewConData(@RequestBody Demodata demodata) {
     System.out.println("addNewData()被调用");
-    //    Message msg = new Message();
-    // save后自动添加id
+    System.out.println(demodata);
     demodataRepository.save(demodata);
-    //    msg.setMsg(
-    //        "The info of " + demodata.getName() + " has been added with the ID: " +
-    // demodata.getId());
-    return demodata.getMessage();
+    List<String> stringArrayList = demodata.getStringList();
+    stringArrayList.add("this is good.");
+    stringArrayList.add("it's nice.");
+    demodata.setStringList(stringArrayList);
+    return demodata;
   }
 
   /**
@@ -105,10 +105,14 @@ public class DemoController {
   public Iterable<Demodata> getContainerDemodata() {
 
     System.out.println("getContainerDemodata()被调用");
+    List<String> strings = new ArrayList<>();
+    strings.add("this is good.");
+    strings.add("it's nice.");
     Iterable<Demodata> demodataList = demodataRepository.findAll();
     int i = 1;
     for (Demodata each : demodataList) {
       each.setMessage(new Message("" + i++));
+      each.setStringList(strings);
     }
     return demodataList;
   }
