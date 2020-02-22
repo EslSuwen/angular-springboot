@@ -4,7 +4,7 @@ import com.cqjtu.angularspringboot.Model.Demodata;
 import com.cqjtu.angularspringboot.Model.DemodataRepository;
 import com.cqjtu.angularspringboot.Model.Message;
 import com.cqjtu.angularspringboot.enity.UserLombok;
-import org.apache.ibatis.scripting.xmltags.ForEachSqlNode;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +18,7 @@ import java.util.List;
  * @time: 2020/1/31 5:56 下午
  */
 @RestController
+@Log4j2
 @RequestMapping(path = "/demo")
 public class DemoController {
 
@@ -85,7 +86,9 @@ public class DemoController {
   @PostMapping(value = "/newConData")
   public Demodata addNewConData(@RequestBody Demodata demodata) {
     System.out.println("addNewData()被调用");
+    log.info("addNewData()被调用");
     System.out.println(demodata);
+    log.info(demodata);
     demodataRepository.save(demodata);
     List<String> stringArrayList = demodata.getStringList();
     stringArrayList.add("this is good.");
@@ -130,6 +133,7 @@ public class DemoController {
     user.setName("Lunafreya");
     user.setPwd("123456");
     System.out.println(user.toString());
+    log.info(user.toString());
     return user;
   }
 }
