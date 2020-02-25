@@ -1,4 +1,4 @@
-package com.cqjtu.angularspringboot.enity;
+package com.cqjtu.angularspringboot.entity;
 
 import lombok.*;
 

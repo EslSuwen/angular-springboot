@@ -41,13 +41,11 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   # 以下配置均有默认值,可以不设置
   global-config:
+    banner: false
     db-config:
       #主键类型 AUTO:"数据库ID自增" INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
       id-type: auto
-      #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
-      field-strategy: NOT_EMPTY
-      #数据库类型
-      db-type: MYSQL
+
   configuration:
     # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
     map-underscore-to-camel-case: true
@@ -58,3 +56,40 @@ mybatis-plus:
 
 logging:
   config: classpath:log4j2/log4j2.xml
+
+management:
+  server:
+    port: 8090
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+info:
+  app:
+    name: heroes
+    version: 1.0
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
+
+api:
+  base-path: /api
+
+security:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET,POST,DELETE,PUT,OPTIONS
+    allowed-headers: Accept,Accept-Encoding,Accept-Language,Authorization,Connection,Content-Type,Host,Origin,Referer,User-Agent,X-Requested-With
+  jwt:
+    header: Authorization
+    secret: mySecret
+    expiration: 7200
+    issuer: ITRunner
+    authentication-path: /api/auth

@@ -3,7 +3,7 @@ package com.cqjtu.angularspringboot.Controller;
 import com.cqjtu.angularspringboot.Model.Demodata;
 import com.cqjtu.angularspringboot.Model.DemodataRepository;
 import com.cqjtu.angularspringboot.Model.Message;
-import com.cqjtu.angularspringboot.enity.UserLombok;
+import com.cqjtu.angularspringboot.entity.UserLombok;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

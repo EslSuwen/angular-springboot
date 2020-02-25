@@ -1,8 +1,9 @@
 package com.cqjtu.angularspringboot.Controller;
 
 import com.cqjtu.angularspringboot.Model.Message;
-import com.cqjtu.angularspringboot.enity.User;
+import com.cqjtu.angularspringboot.entity.User;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import lombok.extern.log4j.Log4j2;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import java.awt.image.BufferedImage;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/login")
+@Log4j2
 public class LoginController {
 
   @Autowired private DefaultKaptcha defaultKaptcha;
@@ -37,10 +39,10 @@ public class LoginController {
    */
   @PostMapping("/toLogin")
   public Message toLogin(@RequestBody User user, HttpServletRequest request) {
-    System.out.println(request.getSession().getAttribute("teachernum"));
-    System.out.println(user.getId() + " : " + user.getPwd());
+    log.info(request.getSession().getAttribute("teachernum"));
+    log.info(user.getUserNo() + " : " + user.getUserPwd());
     Message msg = new Message();
-    msg.setMsg("The member of " + user.getId() + " has been logined: " + user.getPwd());
+    msg.setMsg("The member of " + user.getUserNo() + " has been logined: " + user.getUserPwd());
     return msg;
   }
 
@@ -63,7 +65,7 @@ public class LoginController {
       // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
       BufferedImage challenge = defaultKaptcha.createImage(createText);
       ImageIO.write(challenge, "jpg", jpegOutputStream);
-      System.out.println("createImageCode:{}" + request.getSession().getAttribute("imageCode"));
+      log.info("createImageCode:{}" + request.getSession().getAttribute("imageCode"));
     } catch (IllegalArgumentException e) {
       response.sendError(HttpServletResponse.SC_NOT_FOUND);
       return;
