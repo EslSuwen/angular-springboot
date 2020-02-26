@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.cqjtu.angularspringboot.entity.User;
 
 /**
- * 服务类
+ * 用户服务类
  *
  * @author suwen
  * @since 2020-02-24

@@ -14,6 +14,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 带验证 user 实体
+ *
  * @author suwen
  * @since 2020-02-24
  */

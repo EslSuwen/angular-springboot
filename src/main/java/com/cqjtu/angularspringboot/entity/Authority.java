@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Authority
+ * Authority 已验证用户
  *
  * @author suwen
  * @date 2020/2/24 下午1:34

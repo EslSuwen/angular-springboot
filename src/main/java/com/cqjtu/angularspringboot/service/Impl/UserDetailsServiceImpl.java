@@ -14,6 +14,12 @@ import java.util.List;
 
 import static com.cqjtu.angularspringboot.util.AuthorityUtil.createGrantedAuthorities;
 
+/**
+ * SpringBoot UserDetails 服务实现类
+ *
+ * @author suwen
+ * @date 2020/2/26 下午12:20
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

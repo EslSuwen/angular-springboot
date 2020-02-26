@@ -3,6 +3,8 @@ package com.cqjtu.angularspringboot.Controller;
 import com.cqjtu.angularspringboot.Model.Message;
 import com.cqjtu.angularspringboot.entity.User;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 
 /**
- * 登录 controller
+ * 用户登录控制器
  *
  * @author: suwen
  * @time: 2020/1/30 6:58 下午
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/login")
+@Api(tags = "用户登录-控制器")
 @Log4j2
 public class LoginController {
 
@@ -37,8 +39,9 @@ public class LoginController {
    * @author: suwen
    * @time: 2020/2/3 1:26 下午
    */
-  @PostMapping("/toLogin")
-  public Message toLogin(@RequestBody User user, HttpServletRequest request) {
+  @ApiOperation(value = "登录验证", notes = "用户登录验证，登录后状态存在 session 中。")
+  @PostMapping("/login")
+  public Message login(@RequestBody User user, HttpServletRequest request) {
     log.info(request.getSession().getAttribute("teachernum"));
     log.info(user.getUserNo() + " : " + user.getUserPwd());
     Message msg = new Message();
@@ -46,14 +49,19 @@ public class LoginController {
     return msg;
   }
 
-  @GetMapping("/Login")
-  public Message loginTest() {
-    Message msg = new Message();
-    msg.setMsg("The member of " + 123 + " has been logined: " + 123);
-    return msg;
-  }
-
-  @RequestMapping("/createImageCode")
+  /**
+   * 创建动态验证码
+   *
+   * @param request http 请求
+   * @param response http 响应
+   * @return
+   * @author suwen
+   * @date 2020/2/26 下午12:06
+   */
+  @ApiOperation(
+      value = "创建动态验证码",
+      notes = "客户端有登录时请求创建动态验证码，服务器将生成 4 位数字和字母的随机值，并存在 session 中等待验证。")
+  @GetMapping("/createImageCode")
   public void createImageCode(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
     byte[] captchaChallengeAsJpeg = null;
