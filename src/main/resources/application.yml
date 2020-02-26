@@ -70,8 +70,8 @@ management:
       show-details: always
 info:
   app:
-    name: heroes
-    version: 1.0
+    name: Angular && Spring Boot
+    version: v4.1
 
 springfox:
   documentation:
@@ -91,5 +91,5 @@ security:
     header: Authorization
     secret: mySecret
     expiration: 7200
-    issuer: ITRunner
+    issuer: suwen
     authentication-path: /api/auth

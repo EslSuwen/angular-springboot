@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "security")
+@ConfigurationProperties( prefix = "security")
 public class SecurityProperties {
 
   private Cors cors = new Cors();

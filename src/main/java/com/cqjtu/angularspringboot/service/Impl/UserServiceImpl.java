@@ -7,7 +7,7 @@ import com.cqjtu.angularspringboot.service.UserService;
 import org.springframework.stereotype.Service;
 
 /**
- * 服务实现类
+ * 用户服务实现类
  *
  * @author suwen
  * @since 2020-02-24

@@ -23,14 +23,13 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import static org.springframework.http.HttpMethod.*;
 
 /**
- * WebSecurityConfig
+ * WebSecurityConfig Spring Security 配置
  *
  * @author suwen
  * @date 2020/2/25 上午11:13
  */
 @Configuration
 @EnableWebSecurity
-@SuppressWarnings("SpringJavaAutowiringInspection")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   private static final String ROLE_ADMIN = "ADMIN";
 
@@ -39,6 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Value("${management.endpoints.web.exposure.include}")
   private String[] actuatorExposures;
+
+  /** 放行白名单 */
+  private static String[] WHITE_LIST = {
+    "/",
+    "/demo/**",
+    "/**/*.css,",
+    "/**/*.js",
+    "/api-docs",
+    "/swagger-resources/**",
+    "/swagger-ui.html**",
+    "/webjars/**",
+    "/csrf"
+  };
 
   private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
@@ -79,6 +91,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(securityProperties.getJwt().getAuthenticationPath())
         .permitAll()
         .antMatchers(OPTIONS, "/**")
+        .permitAll()
+        .antMatchers(WHITE_LIST)
         .permitAll()
         .antMatchers(POST, apiPath)
         .hasRole(ROLE_ADMIN)

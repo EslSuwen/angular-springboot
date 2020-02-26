@@ -4,6 +4,8 @@ import com.cqjtu.angularspringboot.Model.Demodata;
 import com.cqjtu.angularspringboot.Model.DemodataRepository;
 import com.cqjtu.angularspringboot.Model.Message;
 import com.cqjtu.angularspringboot.entity.UserLombok;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import java.util.List;
  * @author: suwen
  * @time: 2020/1/31 5:56 下午
  */
+@Api(tags = "Demo-控制器")
 @RestController
 @Log4j2
 @RequestMapping(path = "/demo")
@@ -33,6 +36,7 @@ public class DemoController {
    * @author: suwen
    * @time: 2020/1/31 5:58 下午
    */
+  @ApiOperation(value = "新增数据测试", notes = "新增 Demodata 数据测试")
   @PostMapping(value = "/newData")
   public Message addNewData(@RequestBody Demodata demodata) {
     System.out.println("addNewData()被调用");
@@ -51,6 +55,7 @@ public class DemoController {
    * @author: suwen
    * @time: 2020/1/31 5:59 下午
    */
+  @ApiOperation(value = "获取数据测试", notes = "获取 Demodata 数据测试")
   @GetMapping(value = "/getData")
   public Iterable<Demodata> getDemodatas() {
 
@@ -66,6 +71,7 @@ public class DemoController {
    * @author: suwen
    * @time: 2020/1/31 6:00 下午
    */
+  @ApiOperation(value = "删除数据测试", notes = "删除 Demodata 数据测试")
   @DeleteMapping(value = "/clearData")
   public Message clearDemodatas() {
     System.out.println("clearDemodatas()被调用");
@@ -83,6 +89,7 @@ public class DemoController {
    * @author: suwen
    * @time: 2020/2/20 下午4:26
    */
+  @ApiOperation(value = "测试新建容器数据", notes = "测试新建容器数据。")
   @PostMapping(value = "/newConData")
   public Demodata addNewConData(@RequestBody Demodata demodata) {
     System.out.println("addNewData()被调用");
@@ -104,6 +111,7 @@ public class DemoController {
    * @author: suwen
    * @time: 2020/2/20 下午4:08
    */
+  @ApiOperation(value = "测试获得容器数据", notes = "测试获得容器数据。")
   @GetMapping(value = "/getConData")
   public Iterable<Demodata> getContainerDemodata() {
 
@@ -127,6 +135,7 @@ public class DemoController {
    * @time: 2020/2/21 下午12:29
    * @return:
    */
+  @ApiOperation(value = "测试 lombok", notes = "测试 lombok 返回测试。")
   @GetMapping("/lombok")
   public UserLombok getUserTest() {
     UserLombok user = new UserLombok();

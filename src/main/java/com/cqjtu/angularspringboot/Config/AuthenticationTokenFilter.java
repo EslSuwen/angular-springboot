@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * AuthenticationTokenFilter
+ * AuthenticationTokenFilter 验证权限 token 过滤器
  *
  * @author suwen
  * @date 2020/2/24 下午1:42
@@ -36,9 +36,8 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     if (authToken != null && authToken.startsWith("Bearer ")) {
       authToken = authToken.substring(7);
     }
-    log.info(authToken);
     UserDetails user = jwtTokenUtil.verify(authToken);
-    log.info(user);
+    log.info("user: " + user);
 
     if (user != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       logger.info("checking authentication for user " + user.getUsername());
