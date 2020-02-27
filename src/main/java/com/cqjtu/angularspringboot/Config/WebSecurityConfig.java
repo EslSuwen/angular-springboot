@@ -45,11 +45,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     "/demo/**",
     "/**/*.css,",
     "/**/*.js",
+    "/**/*.html",
     "/api-docs",
     "/swagger-resources/**",
-    "/swagger-ui.html**",
     "/webjars/**",
-    "/csrf"
+    "/csrf/**"
   };
 
   private final JwtAuthenticationEntryPoint unauthorizedHandler;
