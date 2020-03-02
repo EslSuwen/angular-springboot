@@ -34,13 +34,16 @@ public class User implements Serializable {
   @TableId(value = "user_no", type = IdType.AUTO)
   private Integer userNo;
 
-  @ApiModelProperty(value = "用户密码", position = 1)
+  @ApiModelProperty(value = "用户密码", position = 1, required = true)
   private String userPwd;
 
-  @ApiModelProperty(value = "用户名", position = 2)
+  @ApiModelProperty(value = "用户名", position = 2, required = true)
   private String userName;
 
-  @ApiModelProperty(value = "已验证用户列表", position = 3)
+  @ApiModelProperty(value = "用户权限", position = 3, required = true)
+  private Integer userTab;
+
+  @ApiModelProperty(value = "用户权限列表", position = 4)
   @TableField(exist = false)
   private List<Authority> authorities;
 }

@@ -1,7 +1,7 @@
 package com.cqjtu.angularspringboot.entity;
 
 /**
- * AuthorityName 用户权限
+ * AuthorityName 用户权限枚举
  *
  * @author suwen
  * @date 2020/2/24 下午1:36

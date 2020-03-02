@@ -1,7 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id 'war'
     id 'java'
 }
 
@@ -85,9 +84,6 @@ configurations {
     all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 }
 
-test {
-    useJUnitPlatform()
-}
 
 // angular setting
 def webAppDir = "$projectDir/src/main/webapp/demo-app"

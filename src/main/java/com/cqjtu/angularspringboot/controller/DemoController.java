@@ -1,4 +1,4 @@
-package com.cqjtu.angularspringboot.Controller;
+package com.cqjtu.angularspringboot.controller;
 
 import com.cqjtu.angularspringboot.Model.Demodata;
 import com.cqjtu.angularspringboot.Model.DemodataRepository;
@@ -6,10 +6,12 @@ import com.cqjtu.angularspringboot.Model.Message;
 import com.cqjtu.angularspringboot.entity.UserLombok;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class DemoController {
    */
   @ApiOperation(value = "新增数据测试", notes = "新增 Demodata 数据测试")
   @PostMapping(value = "/newData")
-  public Message addNewData(@RequestBody Demodata demodata) {
+  public Message addNewData(@NonNull @RequestBody Demodata demodata) {
     System.out.println("addNewData()被调用");
     Message msg = new Message();
     // save后自动添加id
@@ -91,7 +93,7 @@ public class DemoController {
    */
   @ApiOperation(value = "测试新建容器数据", notes = "测试新建容器数据。")
   @PostMapping(value = "/newConData")
-  public Demodata addNewConData(@RequestBody Demodata demodata) {
+  public Demodata addNewConData(@Valid @RequestBody Demodata demodata) {
     System.out.println("addNewData()被调用");
     log.info("addNewData()被调用");
     System.out.println(demodata);
@@ -144,5 +146,19 @@ public class DemoController {
     System.out.println(user.toString());
     log.info(user.toString());
     return user;
+  }
+
+  /**
+   * 测试删除权限
+   *
+   * @author: suwen
+   * @time: 2020/2/21 下午12:29
+   * @return:
+   */
+  @ApiOperation(value = "测试删除权限", notes = "测试删除权限。")
+  @DeleteMapping("/delete")
+  public Message deleteTest() {
+
+    return new Message("删除成功。");
   }
 }

@@ -1,4 +1,5 @@
-package com.cqjtu.angularspringboot.service.impl;
+package com.cqjtu.angularspringboot.service.Impl;
+
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cqjtu.angularspringboot.entity.User;

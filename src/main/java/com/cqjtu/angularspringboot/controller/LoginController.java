@@ -1,4 +1,4 @@
-package com.cqjtu.angularspringboot.Controller;
+package com.cqjtu.angularspringboot.controller;
 
 import com.cqjtu.angularspringboot.Model.Message;
 import com.cqjtu.angularspringboot.entity.User;

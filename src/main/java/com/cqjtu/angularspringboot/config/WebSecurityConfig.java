@@ -1,6 +1,6 @@
-package com.cqjtu.angularspringboot.Config;
+package com.cqjtu.angularspringboot.config;
 
-import com.cqjtu.angularspringboot.Config.SecurityProperties.Cors;
+import com.cqjtu.angularspringboot.config.SecurityProperties.Cors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -23,7 +23,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import static org.springframework.http.HttpMethod.*;
 
 /**
- * WebSecurityConfig Spring Security 配置
+ * WebSecurityConfig Spring Security 配置。 在 Spring Boot 2.0 中必须覆盖 authenticationManagerBean ()
+ * 方法，否则在 @Autowired authenticationManager 时会报错：Field authenticationManager required a bean of type
+ * 'org.springframework.security.authentication.AuthenticationManager' that could not be found.
+ * 初始化数据中的密码是调用 new BCryptPasswordEncoder ().encode () 方法生成的。 POST\PUT\DELETE 请求需要 "ADMIN" 角色。调用
+ * hasRole () 方法时应去掉前缀 "ROLE_"，方法会自动补充，否则请使用 hasAuthority ()。
  *
  * @author suwen
  * @date 2020/2/25 上午11:13
@@ -87,25 +91,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and() // don't create session
         .authorizeRequests()
         .requestMatchers(EndpointRequest.to(actuatorExposures))
+        .hasRole(ROLE_ADMIN)
+        .requestMatchers(EndpointRequest.toAnyEndpoint())
         .permitAll()
         .antMatchers(securityProperties.getJwt().getAuthenticationPath())
         .permitAll()
         .antMatchers(OPTIONS, "/**")
         .permitAll()
-        .antMatchers(WHITE_LIST)
-        .permitAll()
         .antMatchers(POST, apiPath)
         .hasRole(ROLE_ADMIN)
         .antMatchers(PUT, apiPath)
         .hasRole(ROLE_ADMIN)
-        .antMatchers(DELETE, apiPath)
+        .antMatchers(DELETE, "/**")
         .hasRole(ROLE_ADMIN)
+        .antMatchers(WHITE_LIST)
+        .permitAll()
         .anyRequest()
         .authenticated()
         .and()
+        // Custom JWT based security filter
         .addFilterBefore(
-            authenticationTokenFilterBean(),
-            UsernamePasswordAuthenticationFilter.class) // Custom JWT based security filter
+            authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
         .headers()
         .cacheControl(); // disable page caching
   }
