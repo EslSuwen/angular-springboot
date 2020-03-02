@@ -1,7 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id 'war'
     id 'java'
 }
 
@@ -18,8 +17,11 @@ repositories {
 dependencies {
 
 
+    // https://mvnrepository.com/artifact/com.github.xiaoymin/swagger-bootstrap-ui
+    compile group: 'com.github.xiaoymin', name: 'swagger-bootstrap-ui', version: '1.9.6'
+
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+//    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
@@ -82,9 +84,6 @@ configurations {
     all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 }
 
-test {
-    useJUnitPlatform()
-}
 
 // angular setting
 def webAppDir = "$projectDir/src/main/webapp/demo-app"

@@ -34,11 +34,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) {
     User user = userMapper.selectById(username);
     List<Authority> authorities = new ArrayList<>();
-    List<User> users = new ArrayList<>();
-    User user1 = new User();
-    user1.setUserName("admin");
-    users.add(user1);
-    authorities.add(new Authority(1L, AuthorityName.ROLE_ADMIN, users));
+    if (user.getUserTab() == 1) {
+      authorities.add(new Authority(1L, AuthorityName.ROLE_ADMIN));
+    } else {
+      authorities.add(new Authority(1L, AuthorityName.ROLE_USER));
+    }
     user.setAuthorities(authorities);
     return create(user);
   }

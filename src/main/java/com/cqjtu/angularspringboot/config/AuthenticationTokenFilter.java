@@ -1,4 +1,4 @@
-package com.cqjtu.angularspringboot.Config;
+package com.cqjtu.angularspringboot.config;
 
 import com.cqjtu.angularspringboot.util.JwtTokenUtil;
 import lombok.extern.log4j.Log4j2;
@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * AuthenticationTokenFilter 验证权限 token 过滤器
+ * AuthenticationTokenFilter 验证权限。 token 过滤器 从 Request Header 中读取 Bearer Token 并验证，如验证成功则将用户信息保存在
+ * SecurityContext 中，用户才可访问受限资源。在每次请求结束后，SecurityContext 会自动清空。
  *
  * @author suwen
  * @date 2020/2/24 下午1:42
@@ -37,10 +38,14 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
       authToken = authToken.substring(7);
     }
     UserDetails user = jwtTokenUtil.verify(authToken);
-    log.info("user: " + user);
+    log.info("user: " + user + "  URI: " + request.getRequestURI());
 
     if (user != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      logger.info("checking authentication for user " + user.getUsername());
+      log.info(
+          "checking authentication for user "
+              + user.getUsername()
+              + " with tab "
+              + user.getAuthorities());
       UsernamePasswordAuthenticationToken authentication =
           new UsernamePasswordAuthenticationToken(user.getUsername(), "N/A", user.getAuthorities());
       authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

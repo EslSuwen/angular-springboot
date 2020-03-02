@@ -1,5 +1,7 @@
 package com.cqjtu.angularspringboot.Model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,6 +14,7 @@ import java.util.List;
  * @author: suwen
  * @time: 2020/1/31 6:01 下午
  */
+@ApiModel(description = "测试数据实体")
 @Entity
 @Data
 public class Demodata {
@@ -22,13 +25,23 @@ public class Demodata {
    * @author: suwen
    * @time: 2020/1/31 6:01 下午
    */
+  @ApiModelProperty(position = 0, value = "数据编号[添加操作可不传递,修改必传]")
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
   @GenericGenerator(name = "native", strategy = "native")
   private Integer id;
 
+  @ApiModelProperty(position = 1, value = "姓名", required = true)
   private String name;
+
+  @ApiModelProperty(position = 2, value = "身高", required = true)
   private Integer height;
-  @Transient private Message message;
-  @Transient private List<String> stringList;
+
+  @ApiModelProperty(position = 3, value = "消息")
+  @Transient
+  private Message message;
+
+  @ApiModelProperty(position = 4, value = "列表数据")
+  @Transient
+  private List<String> stringList;
 }

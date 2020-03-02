@@ -1,4 +1,4 @@
-package com.cqjtu.angularspringboot.Config;
+package com.cqjtu.angularspringboot.config;
 
 import lombok.Getter;
 import lombok.Setter;
